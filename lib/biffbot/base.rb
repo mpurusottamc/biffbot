@@ -32,8 +32,11 @@ module Biffbot
       when 'custom'
         url = "http://api.diffbot.com/v3/#{options[:api_name]}?token=#{token}&url=#{url}"
       when 'article', 'image', 'product'
-        url = "http://api.diffbot.com/v2/#{type}?token=#{token}&url=#{url}"
-        url = "http://api.diffbot.com/#{version}/#{type}?token=#{token}&url=#{url}" if version == 'v2' || version == 'v3'
+        if version == 'v2' || version == 'v3'
+          url = "http://api.diffbot.com/#{version}/#{type}?token=#{token}&url=#{url}" 
+        else  
+          url = "http://api.diffbot.com/v2/#{type}?token=#{token}&url=#{url}"
+        end
       end
       url
     end
